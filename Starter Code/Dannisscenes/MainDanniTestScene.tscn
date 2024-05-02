@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://cd6v1uef1x0ta"]
+
+[ext_resource type="PackedScene" uid="uid://barj6hlnx01wv" path="res://Dannisscenes/godoticonnode.tscn" id="1_ljyrx"]
+[ext_resource type="Script" path="res://Dannisscenes/MainDanniTestScene.gd" id="1_pmm82"]
+[ext_resource type="Material" uid="uid://caap4ab5nopa3" path="res://pad_material.tres" id="2_5iqb8"]
+[ext_resource type="PackedScene" uid="uid://nb8daasaeu3i" path="res://explosion.tscn" id="2_uyniy"]
+[ext_resource type="Texture2D" uid="uid://rb8smo0f45mc" path="res://icon.svg" id="2_ygy3l"]
+[ext_resource type="Texture2D" uid="uid://mxxn1wfdfuli" path="res://sprites/10x10.png" id="3_k5647"]
+[ext_resource type="Script" path="res://Dannisscenes/DanniHSlider.gd" id="4_aoeq8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xybv"]
+size = Vector2(123.314, 123.246)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_pmm82")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(514, 984)
+scale = Vector2(8.304, 2.28)
+
+[node name="GroundCollider" type="CollisionShape2D" parent="Area2D"]
+material = ExtResource("2_5iqb8")
+position = Vector2(-0.361263, -43.6404)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_6xybv")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D/GroundCollider"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(-0.782757, -48.8158)
+scale = Vector2(12.2712, 10.7632)
+texture = ExtResource("3_k5647")
+
+[node name="IconsFalling" parent="." instance=ExtResource("1_ljyrx")]
+position = Vector2(512, 226)
+
+[node name="explosion" parent="IconsFalling" instance=ExtResource("2_uyniy")]
+position = Vector2(-279, 54)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(518, 397)
+texture = ExtResource("2_ygy3l")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 337.0
+offset_bottom = 146.0
+columns = 2
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Count:"
+
+[node name="HSlider" type="HSlider" parent="GridContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 17.0
+value = 17.0
+tick_count = 5
+script = ExtResource("4_aoeq8")
+
+[node name="Label2" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="Button" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Create Nodes "
+
+[connection signal="hidden" from="IconsFalling" to="." method="_on_node_2d_hidden"]
+[connection signal="value_changed" from="GridContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="GridContainer/Button" to="." method="_on_button_pressed"]

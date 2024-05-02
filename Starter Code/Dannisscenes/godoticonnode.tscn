@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://barj6hlnx01wv"]
+
+[ext_resource type="Texture2D" uid="uid://rb8smo0f45mc" path="res://icon.svg" id="1_7u6ye"]
+[ext_resource type="Script" path="res://Dannisscenes/godoticonnode.gd" id="1_rnnov"]
+[ext_resource type="PackedScene" uid="uid://nb8daasaeu3i" path="res://explosion.tscn" id="3_v6657"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7dl37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mei7h"]
+size = Vector2(24.4832, 20)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_rnnov")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(2, -4)
+physics_material_override = SubResource("PhysicsMaterial_7dl37")
+gravity_scale = 20.0
+inertia = 4.55
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_7u6ye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-1, 0)
+scale = Vector2(5.14639, 6.18797)
+shape = SubResource("RectangleShape2D_mei7h")
+
+[node name="explosion" parent="RigidBody2D" instance=ExtResource("3_v6657")]
